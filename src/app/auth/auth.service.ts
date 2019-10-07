@@ -44,8 +44,9 @@ export class AuthService {
       firebase.auth().currentUser.sendEmailVerification();
       firebase.auth().currentUser.updateProfile({
         displayName: form.fname + " " + form.lname,
-        photoURL: ""
+        photoURL: "../../assets/imgs/user.png"
       }).then(() => {
+        this.createUser(form.fname + " " + form.lname, firebase.auth().currentUser.uid)
         this.navCtrl.navigateForward("/confirm-email")
       })
     }).catch((error) => {
@@ -73,12 +74,28 @@ export class AuthService {
     })
   }
 
-  sendPasswordReset(email){
-      firebase.auth().sendPasswordResetEmail(email).then(()=>{
-        this.helperService.okAlert("Password Reset Email", "Password rest email has been sent")
-      }).catch((error)=>{
-        this.helperService.okAlert("Error Sending Password Reset Email", error.message)
-      })
-    
+  sendPasswordReset(email) {
+    firebase.auth().sendPasswordResetEmail(email).then(() => {
+      this.helperService.okAlert("Password Reset Email", "Password rest email has been sent")
+    }).catch((error) => {
+      this.helperService.okAlert("Error Sending Password Reset Email", error.message)
+    })
+  }
+
+  createUser(name, uid) {
+    firebase.firestore().doc("/users/" + uid).set({
+      name: name,
+      uid: uid,
+      createdDate: new Date(),
+      photoURL: "../../assets/imgs/user.png",
+    })
+  }
+
+  updateUser(name, uid, photoURL){
+    firebase.firestore().doc("/users/" + uid).update({
+      name: name,
+      uid: uid,
+      photoURL: photoURL,
+    })
   }
 }
