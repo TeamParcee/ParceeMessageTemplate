@@ -10,6 +10,12 @@ const routes: Routes = [
   { path: 'confirm-email', loadChildren: './confirm-email/confirm-email.module#ConfirmEmailPageModule' },
   { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },
   { path: 'settings', loadChildren: './settings/settings.module#SettingsPageModule' },
+  { path: 'messages', loadChildren: './messages/messages.module#MessagesPageModule' },
+  { path: 'contacts', loadChildren: './contacts/contacts.module#ContactsPageModule' },
+  { path: 'select-contact', loadChildren: './messages/select-contact/select-contact.module#SelectContactPageModule' },
+
+
+
 ];
 
 @NgModule({

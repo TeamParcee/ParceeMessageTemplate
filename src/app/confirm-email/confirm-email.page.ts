@@ -21,12 +21,16 @@ export class ConfirmEmailPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    setInterval(() => {
+    this.checkEmailInterval = setInterval(() => {
       this.checkEmailVerified();
     }, 1000)
   }
-  email = firebase.auth().currentUser.email;
 
+  ionViewWillLeave(){
+    clearInterval(this.checkEmailInterval)
+  }
+  email = firebase.auth().currentUser.email;
+  checkEmailInterval;
 
   checkEmailVerified() {
     firebase.auth().currentUser.reload();

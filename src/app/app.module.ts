@@ -10,6 +10,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import * as firebase from 'firebase';
 import { FormBuilder } from '@angular/forms';
+import { MessagePage } from './messages/message/message.page';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import { SelectContactPage } from './messages/select-contact/select-contact.page';
 
 
 var firebaseConfig = {
@@ -26,8 +29,15 @@ firebase.initializeApp(firebaseConfig);
 
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [
+    AppComponent,
+    MessagePage,
+    SelectContactPage,
+  ],
+  entryComponents: [
+  MessagePage,
+  SelectContactPage,
+  ],
   imports: [
     BrowserModule, 
     IonicModule.forRoot(), 
