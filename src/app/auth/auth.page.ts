@@ -22,7 +22,9 @@ export class AuthPage implements OnInit {
   showRegisterLnameError;
   showLoginEmailError;
   showLoginPasswordError;
-
+  loginForm: FormGroup;
+  registerForm: FormGroup;
+  forgotPasswordForm: FormGroup;
 
 
 
@@ -110,22 +112,25 @@ export class AuthPage implements OnInit {
   }
 
 
-  registerWithEmail(){
+  registerWithEmail() {
     this.authService.createAccountWithEmail(this.registerForm.value);
   }
-  login(){
+  login() {
     this.authService.signinWithEmail(this.loginForm.value);
   }
-  
-  resetPassword(){
+
+  resetPassword() {
     this.authService.sendPasswordReset(this.forgotPasswordForm.controls["email"].value)
   }
-  loginForm: FormGroup;
-  registerForm: FormGroup;
-  forgotPasswordForm: FormGroup;
 
 
 
-
-
+  getUserData() {
+    return new Promise((resolve) => {
+      firebase.firestore().doc("/users/" + firebase.auth().currentUser.uid).get().then((userSnap) => {
+        let user = userSnap.data();
+        return resolve(user);
+      })
+    })
+  }
 }

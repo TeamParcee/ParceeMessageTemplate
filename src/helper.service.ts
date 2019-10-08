@@ -19,7 +19,7 @@ export class HelperService {
   loading;
   showLoading() {
 
-    this.loading = this.loadingCtrl.create().then((loading)=>{
+    this.loading = this.loadingCtrl.create().then((loading) => {
       loading.present()
     })
   }
@@ -35,6 +35,24 @@ export class HelperService {
     })
   }
 
+  openModalPromise(component, componentProps) {
+
+    return new Promise((resolve) => {
+      return this.modalCtrl.create({
+        component: component,
+        componentProps: componentProps
+      }).then((modal) => {
+        modal.present();
+        modal.onDidDismiss().then(() => {
+          return resolve();
+        })
+
+
+      })
+    })
+  }
+
+
   closeModal() {
     this.modalCtrl.dismiss()
   }
@@ -49,23 +67,23 @@ export class HelperService {
     })
   }
 
-  stopTimerAlert(activity){
-    return new Promise((resolve)=>{
+  stopTimerAlert(activity) {
+    return new Promise((resolve) => {
       this.alertCtrl.create({
         header: "Activity Started",
         message: activity.name + " has started",
         buttons: [{
           text: "OK",
           role: "cancel",
-          handler: () =>{
+          handler: () => {
             return resolve(true)
           }
         }]
-      }).then((alert)=>{
+      }).then((alert) => {
         alert.present();
       })
     })
-    
+
   }
   confirmationAlert(header: string, message: string, buttons: { denyText: string, confirmText: string }) {
 

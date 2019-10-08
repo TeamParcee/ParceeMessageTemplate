@@ -9,7 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import * as firebase from 'firebase';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormsModule } from '@angular/forms';
 import { MessagePage } from './messages/message/message.page';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { SelectContactPage } from './messages/select-contact/select-contact.page';
@@ -40,6 +40,7 @@ firebase.initializeApp(firebaseConfig);
   ],
   imports: [
     BrowserModule, 
+    FormsModule,
     IonicModule.forRoot(), 
     AppRoutingModule],
   providers: [

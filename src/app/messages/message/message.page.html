@@ -24,10 +24,11 @@
 
 <ion-footer>
   <ion-toolbar color="light">
-    <ion-buttons slot="start">
-      <ion-icon name="send" slot="icon-only"></ion-icon>
-      <ion-button (click)="sendMessage()"></ion-button>
+    <ion-buttons slot="end">
+      <ion-button [disabled]="recipients?.length == 0 || !text" (click)="sendMessage()">
+        <ion-icon name="send" slot="icon-only"></ion-icon>
+      </ion-button>
     </ion-buttons>
-    <ion-textarea class="message-input" autoGrow="true" rows="1" ></ion-textarea>
+    <ion-textarea [(ngModel)]="text" class="message-input" autoGrow="true" rows="1"></ion-textarea>
   </ion-toolbar>
 </ion-footer>

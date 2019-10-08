@@ -20,8 +20,9 @@ export class MessagesPage implements OnInit {
 
 
   createMessage(){
-    this.helper.openModal(MessagePage, {recipients: null});
+    this.helper.openModal(MessagePage, {recipients: null})
   }
+
   viewMessages(){
     this.helper.openModal(MessagePage, {recipients: null});
   }
