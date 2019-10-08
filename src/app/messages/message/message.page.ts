@@ -88,25 +88,21 @@ export class MessagePage implements OnInit {
 
       }
 
-      if (MessageGroupSnapshot.docs.length) {
-        for (let index = 0; index < array.length; index++) {
-          const element = array[index];
-          
-        }
-        MessageGroupSnapshot.forEach((MessageGroup) => {
-          let recipients: [] = MessageGroup.data().recipients;
-          let sameArray = (recipients.sort().toString() == this.getRecipientsUids().sort().toString());
-          if (sameArray) {
-            this.messageId = MessageGroup.id;
-            console.log(this.messageId);
-            
-          } else {
-            this.messageId = firebase.firestore().collection(this.messagesRef).doc().id;
-            console.log(this.messageId);
 
-          }
-        })
-      }
+
+      MessageGroupSnapshot.forEach((MessageGroup) => {
+        let recipients: [] = MessageGroup.data().recipients;
+        let sameArray = (recipients.sort().toString() == this.getRecipientsUids().sort().toString());
+        console.log(sameArray);
+        if (sameArray) {
+          this.messageId = MessageGroup.id;
+          console.log(this.messageId);
+
+        } else {
+          this.messageId = firebase.firestore().collection(this.messagesRef).doc().id;
+          console.log(this.messageId);
+        }
+      })
     })
   }
 }
